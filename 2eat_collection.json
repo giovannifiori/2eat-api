@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "2305d89f-0fc0-4dde-96c3-358f2feae62a",
+		"name": "2eat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"description": "",
+			"item": [
+				{
+					"name": "get users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ2lvdmFubmlmaW9yaSIsInVzZXJJZCI6IjVhZWY5OTMzZTAxMGYzMjdjZjJmYTI4NSIsImlhdCI6MTUyNjA5MjkwNiwiZXhwIjoxNTI2MDk2NTA2fQ.-3OeksBD1Dbidt_ds1rnHDlKK5BgxxEbZaXM_wF1dR4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Giovanni Fiori\",\n\t\"email\": \"gcf@icomp.ufam.edu.br\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Get all users"
+					},
+					"response": []
+				},
+				{
+					"name": "new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ2lvdmFubmlmaW9yaSIsInVzZXJJZCI6IjVhZWY5OTMzZTAxMGYzMjdjZjJmYTI4NSIsImlhdCI6MTUyNjA5MjkwNiwiZXhwIjoxNTI2MDk2NTA2fQ.-3OeksBD1Dbidt_ds1rnHDlKK5BgxxEbZaXM_wF1dR4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Teste2\",\n\t\"email\": \"teste2@icomp.ufam.edu.br\",\n\t\"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users"
+							]
+						},
+						"description": "Create user"
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ2lvdmFubmlmaW9yaSIsInVzZXJJZCI6IjVhZWY5OTMzZTAxMGYzMjdjZjJmYTI4NSIsImlhdCI6MTUyNjA5MjkwNiwiZXhwIjoxNTI2MDk2NTA2fQ.-3OeksBD1Dbidt_ds1rnHDlKK5BgxxEbZaXM_wF1dR4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Giovanni Fiori\",\n\t\"email\": \"gcf@icomp.ufam.edu.br\",\n\t\"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/1",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ2lvdmFubmlmaW9yaSIsInVzZXJJZCI6IjVhZWY5OTMzZTAxMGYzMjdjZjJmYTI4NSIsImlhdCI6MTUyNjA5MjkwNiwiZXhwIjoxNTI2MDk2NTA2fQ.-3OeksBD1Dbidt_ds1rnHDlKK5BgxxEbZaXM_wF1dR4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/1",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user auth",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"gcf@icomp.ufam.edu.br\",\n\t\"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/auth",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ2lvdmFubmlmaW9yaSIsInVzZXJJZCI6IjVhZWY5OTMzZTAxMGYzMjdjZjJmYTI4NSIsImlhdCI6MTUyNjA5MjkwNiwiZXhwIjoxNTI2MDk2NTA2fQ.-3OeksBD1Dbidt_ds1rnHDlKK5BgxxEbZaXM_wF1dR4"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"test22222\",\n\t\"email\": \"test@gmail.com\",\n\t\"password\": \"12345\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/2",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/search/te",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"search",
+								"te"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "interactions",
+			"description": "",
+			"item": [
+				{
+					"name": "follow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/1/follow/4",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"1",
+								"follow",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "following",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/1/following",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"1",
+								"following"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "followers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/4/followers",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"4",
+								"followers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/users/user/1/unfollow/4",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"users",
+								"user",
+								"1",
+								"unfollow",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "recipe",
+			"description": "",
+			"item": [
+				{
+					"name": "get recipes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create recipe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Receita 2\",\n\t\"ingredients\": \"asdsadasdsadasdas\",\n\t\"description\": \"aaaaaa\",\n\t\"user_id\": 3\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update recipe",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"minha receita\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes/recipe/1",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes",
+								"recipe",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete recipe",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"minha receita\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes/recipe/2",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes",
+								"recipe",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recipes by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes/user/3",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes",
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search recipe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes/search/rec",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes",
+								"search",
+								"rec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user recipes feed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://172.17.0.1:3001/recipes/user/1/feed",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"recipes",
+								"user",
+								"1",
+								"feed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "review",
+			"description": "",
+			"item": [
+				{
+					"name": "create review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"3\",\n\t\"recipeId\": \"1\",\n\t\"grade\": \"8\",\n\t\"text\": \"boa pra caralho\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/reviews/",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"reviews",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get review by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"1\",\n\t\"recipeId\": \"1\",\n\t\"grade\": \"8\",\n\t\"text\": \"muito boa\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/reviews/review/1",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"reviews",
+								"review",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get review by recipe",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"1\",\n\t\"recipeId\": \"1\",\n\t\"grade\": \"8\",\n\t\"text\": \"muito boa\"\n}"
+						},
+						"url": {
+							"raw": "http://172.17.0.1:3001/reviews/recipe/1",
+							"protocol": "http",
+							"host": [
+								"172",
+								"17",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"reviews",
+								"recipe",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiZ2NmQGljb21wLnVmYW0uZWR1LmJyIiwidXNlcklkIjoxLCJpYXQiOjE1MjY3NTQ5MTksImV4cCI6MTUyNzAxNDExOX0.guqBcvtCrM6UczJQMsfYWuBqugCQbmftQRtvBK-WLGs",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f7cdda74-fbeb-4f95-ad1f-f3b8534fe1a8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5b84c0bc-6691-4eb8-8abb-41d3eb8f7b28",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
