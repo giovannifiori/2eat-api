@@ -5,8 +5,8 @@ dotenv.config();
 const interfaces = os.networkInterfaces();
 const env = {
     db: {
-        db: '2eat',
-        username: 'root',
+        db: '2eat_',
+        username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         params: {
             host: 'localhost',
@@ -20,7 +20,7 @@ const env = {
             define: {
                 underscored: true,
             },
-            insecureAuth: true
+            logging: false
         },
     },
     app: {

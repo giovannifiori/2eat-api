@@ -3,6 +3,9 @@ import env from './config/environment';
 import db from './config/db';
 import cors from 'cors';
 import morgan from 'morgan';
+import { userRouter } from './routers/user';
+import { recipeRouter } from './routers/recipe';
+import { reviewRouter } from './routers/review';
 
 const app = express();
 
@@ -11,6 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('uploads/'));
 app.use(cors({ origin: true, credentials: true }));
 app.use(morgan('dev'));
+
+app.use('/users', userRouter);
+app.use('/reviews', reviewRouter);
+app.use('/recipes', recipeRouter);
 
 app.route('*').all((req, res) => {
     let error = new Error();
