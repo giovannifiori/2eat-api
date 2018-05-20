@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import sequelize from '../config/db';
+import User from '../models/user';
 
 const Comments = sequelize.define('comments', {
     id: { 
@@ -27,6 +28,8 @@ const Comments = sequelize.define('comments', {
     tableName: 'comments',
     timestamps: true
 });
+
+Comments.belongsTo(User, { foreignKey: 'user_id' });
 
 Comments.sync();
 
