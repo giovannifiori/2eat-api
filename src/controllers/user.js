@@ -67,6 +67,14 @@ export default class UserController {
         });
     };
 
+    validate = (req, res) => {
+        if(req.userAuthData){
+            return res.status(200).json(req.userAuthData);
+        }else{
+            return res.status(401).json({ message: 'AUTH_FAILED', error });
+        }
+    };
+
     authorize = async (req, res) => {
         User.findOne({
             where: {
