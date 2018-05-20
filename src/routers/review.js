@@ -9,6 +9,7 @@ router.use(checkAuth);
 
 router.route('/').post(review.create);
 router.route('/review/:id').get(review.getById).delete(review.delete);
+router.route('/review/:id/comments').get(review.getRecipeReviewComments);
 router.route('/recipe/:recipeId').get(review.getRecipeReviews);
 
 export { router as reviewRouter };
