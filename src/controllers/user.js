@@ -86,7 +86,7 @@ export default class UserController {
                 }, process.env.JWTKEY, {
                     expiresIn: "72h"
                 });
-                return res.status(200).json({ message: 'AUTH_SUCCESSFUL', token });
+                return res.status(200).json({ message: 'AUTH_SUCCESSFUL', name: user.name, token });
             }else{
                 return res.status(401).json({ message: 'AUTH_FAILED' });
             }
