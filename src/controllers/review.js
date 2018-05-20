@@ -4,6 +4,19 @@ import Comments from '../models/comments';
 
 export default class ReviewController {
 
+    getAll = (req, res) => {
+        Review.findAll()
+        .then(reviews => {
+            if(!reviews || reviews.length == 0){
+                return res.status(404).json({ message: 'No reviews found' });
+            }
+            res.status(200).json(reviews);
+        })
+        .catch(error => {
+            res.status(500).json({ message: 'Error getting reviews', error });
+        });
+    };
+
     create = (req, res) => {
         Review.create({
             user_id: req.body.userId,
