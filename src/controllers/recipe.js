@@ -117,9 +117,33 @@ export default class RecipeController {
                 order: [['created_at', 'DESC']],
                 include: [{ model: User, attributes: ['name'] }]
             })
-            .then(recipes => {
+            .then(async recipes => {
                 if(!recipes || recipes.length == 0){
                     return res.status(404).json({ message: 'No recipes found' });
+                }
+                for (let i = 0; i < recipes.length; i++) {
+                    await Review.sum('grade',{
+                        where: {
+                            recipe_id: recipes[i].id
+                        }
+                    }).then(async sum => {
+                        await Review.count({
+                            where: {
+                                recipe_id: recipes[i].id
+                            }
+                        }).then(count => {
+                            let average = sum/count;
+                            let reviewQty = count;
+                            recipes[i].dataValues.average = average.toFixed(2);
+                            recipes[i].dataValues.reviewQty = reviewQty;
+                        })
+                        .catch(error => {
+                            return res.status(500).json({ message: 'error counting', error });
+                        });
+                    })
+                    .catch(error => {
+                        return res.status(500).json({ message: 'error summing', error });
+                    });
                 }
                 res.status(200).json(recipes);
             })
