@@ -1,6 +1,7 @@
 import Recipe from '../models/recipe';
 import UserRelation from '../models/userRelation';
 import Sequelize from 'sequelize';
+import Review from '../models/review';
 
 const Op = Sequelize.Op;
 
@@ -26,10 +27,32 @@ export default class RecipeController {
             }
         })
         .then(recipe => {
-            res.status(200).json(recipe);
+            Review.findAndCountAll({
+                attributes: ['grade'],
+                where: {
+                    recipe_id: recipe.id
+                }
+            })
+            .then(result => {
+                let reviewQty = result.count,
+                average = 0;
+
+                result.rows.forEach(e => {
+                    average += e.grade;
+                });
+                average /= reviewQty;
+
+                recipe.dataValues.average = average.toFixed(2);
+                recipe.dataValues.reviewQty = reviewQty;
+
+                res.status(200).json(recipe);
+            })
+            .catch(error => {
+                res.status(500).json({ message: 'Error getting recipe 1' });
+            });
         })
         .catch(error => {
-            res.status(500).json({ message: 'Error getting recipe' });
+            res.status(500).json({ message: 'Error getting recipe 2' });
         });
     };
 
