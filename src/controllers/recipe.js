@@ -2,6 +2,7 @@ import Recipe from '../models/recipe';
 import UserRelation from '../models/userRelation';
 import Sequelize from 'sequelize';
 import Review from '../models/review';
+import User from '../models/user';
 
 const Op = Sequelize.Op;
 
@@ -99,8 +100,7 @@ export default class RecipeController {
             attributes: ['following_user_id'],
             where: {
                 user_id: req.params.userId,
-            },
-            order: [['created_at', 'DESC']]
+            }
         })
         .then(following => {
             let people = [];
@@ -113,20 +113,22 @@ export default class RecipeController {
                     user_id: {
                         [Op.in]: people
                     }
-                }
+                },
+                order: [['created_at', 'DESC']],
+                include: [{ model: User, attributes: ['name'] }]
             })
             .then(recipes => {
                 if(!recipes || recipes.length == 0){
                     return res.status(404).json({ message: 'No recipes found' });
                 }
-                res.status(200).json(recipes)
+                res.status(200).json(recipes);
             })
             .catch(error => {
-                res.status(500).json({ message: 'Error deleting recipe', error });
+                res.status(500).json({ message: 'Error getting feed', error });
             });
         })
         .catch(error => {
-            res.status(500).json({ message: 'Error deleting recipe', error });
+            res.status(500).json({ message: 'Error getting feed', error });
         });
     };
 

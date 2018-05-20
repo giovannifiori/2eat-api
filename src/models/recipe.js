@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import sequelize from '../config/db';
+import User from './user';
 
 const Recipe = sequelize.define('recipe', {
     id: { 
@@ -47,6 +48,8 @@ const Recipe = sequelize.define('recipe', {
     tableName: 'recipe',
     timestamps: true
 });
+
+Recipe.belongsTo(User, { foreignKey: 'user_id' });
 
 Recipe.sync();
 
