@@ -76,7 +76,8 @@ export default class RecipeController {
             attributes: ['following_user_id'],
             where: {
                 user_id: req.params.userId,
-            }
+            },
+            order: ['created_at', 'DESC']
         })
         .then(following => {
             let people = [];
