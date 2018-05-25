@@ -46,7 +46,7 @@ export default class RecipeController {
                 recipe.dataValues.average = average.toFixed(2);
                 recipe.dataValues.reviewQty = reviewQty;
 
-                res.status(200).json(recipe);
+                res.status(200).json([recipe]);
             })
             .catch(error => {
                 res.status(500).json({ message: 'Error getting recipe 1' });
@@ -107,7 +107,7 @@ export default class RecipeController {
             for(let i=0; i<following.length; i++){
                 people.push(following[i].following_user_id);
             }
-            
+
             Recipe.findAll({
                 where: {
                     user_id: {

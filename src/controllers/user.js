@@ -1,4 +1,6 @@
 import User from '../models/user';
+import Recipe from '../models/recipe';
+import Review from '../models/review';
 import UserRelation from '../models/userRelation';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -22,7 +24,7 @@ export default class UserController {
     getById = (req, res) => {
         User.findById(req.params.id)
         .then(user => {
-            res.status(200).json(user);
+            res.status(200).json([user]);
         })
         .catch(error => {
             res.status(500).json({ mesage: 'some error', error });
@@ -44,7 +46,7 @@ export default class UserController {
             res.status(200).json(users);
         })
         .catch(
-            error => this.errorHandler(error, res)      
+            error => this.errorHandler(error, res)
         );
     };
 
@@ -94,7 +96,7 @@ export default class UserController {
                 }, process.env.JWTKEY, {
                     expiresIn: "72h"
                 });
-                return res.status(200).json({ message: 'AUTH_SUCCESSFUL', name: user.name, token });
+                return res.status(200).json({ message: 'AUTH_SUCCESSFUL', id: user.id, name: user.name, email: user.email, token });
             }else{
                 return res.status(401).json({ message: 'AUTH_FAILED' });
             }
@@ -115,10 +117,10 @@ export default class UserController {
             }
         })
         .then(user => {
-            res.status(200).json({
-                message: 'User udpated',
+            res.status(200).json([{
+                message: 'User updated',
                 user
-            })
+            }])
         })
         .catch(
             error => this.errorHandler(error, res)
@@ -126,14 +128,39 @@ export default class UserController {
     };
 
     delete = (req, res) => {
+
+      Review.destroy({
+          where: {
+              user_id: req.params.id
+          }
+      }).then(
+        Recipe.destroy({
+            where: {
+                user_id: req.params.id
+            }
+        })
+      ).then(
+        UserRelation.destroy({
+            where:{
+                user_id: req.params.id
+            }
+        })
+      ).then(
+        UserRelation.destroy({
+            where:{
+                following_user_id: req.params.id
+            }
+        })
+      ).then(
         User.destroy({
             where:{
                 id: req.params.id
             }
         })
+      )
         .then(user => {
             res.status(200).json({
-                mesage: 'User deleted',
+                message: 'User deleted',
                 user
             })
         })
@@ -182,7 +209,7 @@ export default class UserController {
             for(let i=0; i<following.length; i++){
                 people.push(following[i].following_user_id);
             }
-            
+
             User.findAll({
                 attributes: ['name', 'email'],
                 where: {
@@ -215,7 +242,7 @@ export default class UserController {
             for(let i=0; i<followers.length; i++){
                 people.push(followers[i].user_id);
             }
-            
+
             User.findAll({
                 attributes: ['name', 'email'],
                 where: {
