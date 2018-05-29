@@ -155,6 +155,23 @@ export default class UserController {
         );
     };
 
+    isFollowing = (req, res) => {
+        UserRelation.count({
+            where: {
+                user_id: req.params.id,
+                following_user_id: req.params.followId 
+            }
+        })
+        .then(result => {
+            let status;
+            status = (result) ? true : false;
+            res.status(200).json({ follow: status })
+        })
+        .catch(
+            error => this.errorHandler(error, res)
+        );
+    }
+
     unfollow = (req, res) => {
         UserRelation.destroy({
             where: {
