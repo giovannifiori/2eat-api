@@ -24,7 +24,7 @@ export default class UserController {
     getById = (req, res) => {
         User.findById(req.params.id)
         .then(user => {
-            res.status(200).json([user]);
+            res.status(200).json(user);
         })
         .catch(error => {
             res.status(500).json({ mesage: 'some error', error });
@@ -117,10 +117,10 @@ export default class UserController {
             }
         })
         .then(user => {
-            res.status(200).json([{
+            res.status(200).json({
                 message: 'User updated',
                 user
-            }])
+            })
         })
         .catch(
             error => this.errorHandler(error, res)
