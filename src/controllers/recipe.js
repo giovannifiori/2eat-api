@@ -46,7 +46,7 @@ export default class RecipeController {
                 recipe.dataValues.average = average.toFixed(2);
                 recipe.dataValues.reviewQty = reviewQty;
 
-                res.status(200).json([recipe]);
+                res.status(200).json(recipe);
             })
             .catch(error => {
                 res.status(500).json({ message: 'Error getting recipe 1' });
@@ -86,8 +86,13 @@ export default class RecipeController {
             where: {
                 id: req.params.id
             }
+        }).then(
+          Review.destroy({
+            where: {
+                recipe_id: req.params.id
+            }
         })
-        .then(recipe => {
+      ).then(recipe => {
             res.status(200).json({ message: 'Recipe deleted', recipe });
         })
         .catch(error => {
