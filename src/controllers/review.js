@@ -47,7 +47,7 @@ export default class ReviewController {
             res.status(500).json({ message: 'Error getting review', error });
         });
     };
-    
+
     delete = (req, res) => {
         Review.destroy({
             where: {
@@ -73,13 +73,9 @@ export default class ReviewController {
         })
         .then(reviews => {
             if(!reviews || reviews.length == 0){
-                return res.status(404).json({ message: 'No reviews found for this recipe' });    
+                return res.status(404).json({ message: 'No reviews found for this recipe' });
             }
-            let response = {
-                count: reviews.length,
-                reviews
-            }
-            res.status(200).json(response);
+            res.status(200).json(reviews);
         })
         .catch(error => {
             res.status(500).json({ message: 'Error getting reviews', error });
@@ -98,7 +94,7 @@ export default class ReviewController {
         })
         .then(comments => {
             if(!comments || comments.length == 0){
-                return res.status(404).json({ message: 'No comments found for this review' });    
+                return res.status(404).json({ message: 'No comments found for this review' });
             }
             res.status(200).json(comments);
         })
