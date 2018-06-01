@@ -167,9 +167,22 @@ export default class RecipeController {
                 user_id: req.params.userId
             }
         })
-        .then(recipes => {
+        .then(async recipes => {
             if(!recipes || recipes.length == 0){
                 return res.status(404).json({ message: 'No recipes found' });
+            }
+            for (let i = 0; i < recipes.length; i++) {
+                const thisRecipe = recipes[i];
+                await Review.count({
+                    where: {
+                        recipe_id: thisRecipe.id
+                    }
+                }).then(qty => {
+                    thisRecipe.dataValues.reviewQty = qty;
+                })
+                .catch(error => {
+                    return res.status(500).json({ message: 'Error counting reviews', error });
+                })
             }
             res.status(200).json(recipes);
         })
