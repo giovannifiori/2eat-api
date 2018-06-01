@@ -10,7 +10,9 @@ const Op = Sequelize.Op;
 
 export default class UserController {
     getAll = (req, res) => {
-        User.findAll().then(users => {
+        User.findAll({
+            attributes: ['id', 'name', 'email', 'created_at']
+        }).then(users => {
             if(!users || users.length == 0){
                 return res.status(404).json({ message:'No users found' });
             }
@@ -23,11 +25,69 @@ export default class UserController {
 
     getById = (req, res) => {
         User.findById(req.params.id)
-        .then(user => {
+        .then(async user => {
+            let followingQty, followersQty, average;
+            await UserRelation.count({
+                where: {
+                    user_id: user.id
+                }
+            }).then(following => {
+                followingQty = following;
+            })
+            .catch(err => {
+                this.errorHandler(err, res);
+            });
+
+            await UserRelation.count({
+                where: {
+                    following_user_id: user.id
+                }
+            }).then(followers => {
+                followersQty = followers;
+            })
+            .catch(err => {
+                this.errorHandler(err, res);
+            });
+
+            await Recipe.findAll({
+                where: {
+                    user_id: user.id
+                }
+            }).then(async recipes => {
+                if(!recipes || recipes.length == 0){
+                    average = -1;
+                }else{
+                    for (let i = 0; i < recipes.length; i++) {
+                        let thisRecipe = recipes[i];
+                        await Review.findAndCountAll({
+                            where: {
+                                recipe_id: thisRecipe.id
+                            }
+                        }).then(result => {
+                            let qty = result.count, reviews = result.rows, avg = 0;
+                            for (let i = 0; i < reviews.length; i++) {
+                                let review = reviews[i];
+                                avg += review.grade
+                            }
+                            average = avg/qty;
+                        })
+                        .catch(error => {
+                            this.errorHandler(error, res);
+                        })
+                    }
+                }
+            })
+            .catch(error => {
+                this.errorHandler(error, res);
+            })
+
+            user.dataValues.following = followingQty;
+            user.dataValues.followers = followersQty;
+            user.dataValues.average = average.toFixed(2);
             res.status(200).json(user);
         })
         .catch(error => {
-            res.status(500).json({ mesage: 'some error', error });
+            this.errorHandler(error, res);
         })
     };
 
