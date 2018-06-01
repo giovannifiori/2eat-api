@@ -75,7 +75,11 @@ export default class ReviewController {
             if(!reviews || reviews.length == 0){
                 return res.status(404).json({ message: 'No reviews found for this recipe' });    
             }
-            res.status(200).json(reviews);
+            let response = {
+                count: reviews.length,
+                reviews
+            }
+            res.status(200).json(response);
         })
         .catch(error => {
             res.status(500).json({ message: 'Error getting reviews', error });
