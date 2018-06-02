@@ -118,7 +118,7 @@ export default class UserController {
             User.create({
                 name: req.body.name,
                 email: req.body.email,
-                image_path: req.body.image_path,
+                image_path: req.file.path,
                 password: hash
             })
             .then(user => {
