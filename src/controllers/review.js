@@ -69,7 +69,7 @@ export default class ReviewController {
                 recipe_id: req.params.recipeId
             },
             order: [['created_at', 'DESC']],
-            include: [{ model: User, attributes: ['id', 'name'] }]
+            include: [{ model: User, attributes: ['id', 'name', 'image_path'] }]
         })
         .then(reviews => {
             if(!reviews || reviews.length == 0){

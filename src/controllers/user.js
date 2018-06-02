@@ -118,6 +118,7 @@ export default class UserController {
             User.create({
                 name: req.body.name,
                 email: req.body.email,
+                image_path: req.body.image_path,
                 password: hash
             })
             .then(user => {
@@ -246,7 +247,7 @@ export default class UserController {
         UserRelation.count({
             where: {
                 user_id: req.params.id,
-                following_user_id: req.params.followId 
+                following_user_id: req.params.followId
             }
         })
         .then(result => {
@@ -288,7 +289,7 @@ export default class UserController {
             }
 
             User.findAll({
-                attributes: ['name', 'email'],
+                attributes: ['id', 'name', 'email', 'image_path'],
                 where: {
                     id: {
                         [Op.in]: people
@@ -321,7 +322,7 @@ export default class UserController {
             }
 
             User.findAll({
-                attributes: ['name', 'email'],
+                attributes: ['id', 'name', 'email', 'image_path'],
                 where: {
                     id: {
                         [Op.in]: people

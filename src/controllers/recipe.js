@@ -120,7 +120,7 @@ export default class RecipeController {
                     }
                 },
                 order: [['created_at', 'DESC']],
-                include: [{ model: User, attributes: ['name'] }]
+                include: [{ model: User, attributes: ['name', 'image_path'] }]
             })
             .then(async recipes => {
                 if(!recipes || recipes.length == 0){

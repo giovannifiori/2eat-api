@@ -2,7 +2,7 @@ import sequelize from '../config/db';
 import Sequelize from 'sequelize';
 
 const User = sequelize.define('user', {
-    id: { 
+    id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -30,6 +30,10 @@ const User = sequelize.define('user', {
         validate: {
             notEmpty: true
         }
+    },
+    image_path: {
+        type: Sequelize.STRING,
+        allowNull: true,
     },
 }, {
     tableName: 'user',
