@@ -58,7 +58,14 @@ export default class RecipeController {
     };
 
     create = (req, res) => {
-        Recipe.create(req.body)
+        Recipe.create({
+            title: req.body.title,
+            ingredients: req.body.ingredients,
+            description: req.body.description,
+            user_id: req.body.user_id,
+            tags: req.body.tags,
+            image_path: req.file.path
+        })
         .then(recipe => {
             res.status(201).json({ message: 'Recipe created', recipe });
         })
