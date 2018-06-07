@@ -115,6 +115,7 @@ export default class UserController {
             if(error){
                 return this.errorHandler(error, res);
             }
+            req.file.path = req.file.path.replace('uploads/', ''); // "quick fix" to have a recognazible url
             User.create({
                 name: req.body.name,
                 email: req.body.email,
