@@ -3,7 +3,7 @@ import sequelize from '../config/db';
 import User from './user';
 
 const Recipe = sequelize.define('recipe', {
-    id: { 
+    id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -25,7 +25,7 @@ const Recipe = sequelize.define('recipe', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            len: [1, 360]
+            len: [1, 500]
         }
     },
     description: {
@@ -33,7 +33,7 @@ const Recipe = sequelize.define('recipe', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            len: [1, 140]
+            len: [1, 1000]
         }
     },
     user_id: {
