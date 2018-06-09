@@ -58,15 +58,17 @@ export default class RecipeController {
     };
 
     create = (req, res) => {
-        req.file.path = req.file.path.replace('uploads/', ''); // "quick fix" to have a recognazible url
-        Recipe.create({
+        const data = {
             title: req.body.title,
             ingredients: req.body.ingredients,
             description: req.body.description,
             user_id: req.body.user_id,
-            tags: req.body.tags,
-            image_path: req.file.path
-        })
+            tags: req.body.tags
+        };
+        if(req.file){
+            data.image_path = req.file.path.replace('uploads/', '');
+        }
+        Recipe.create(data)
         .then(recipe => {
             res.status(201).json({ message: 'Recipe created', recipe });
         })
