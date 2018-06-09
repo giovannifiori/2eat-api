@@ -115,13 +115,15 @@ export default class UserController {
             if(error){
                 return this.errorHandler(error, res);
             }
-            req.file.path = req.file.path.replace('uploads/', ''); // "quick fix" to have a recognazible url
-            User.create({
+            const data = {
                 name: req.body.name,
                 email: req.body.email,
-                image_path: req.file.path,
                 password: hash
-            })
+            };
+            if(req.file) {
+                data.image_path = req.file.path.replace('uploads/', '');
+            }
+            User.create(data)
             .then(user => {
                 res.status(201).json({ message: 'User created', user });
             })
