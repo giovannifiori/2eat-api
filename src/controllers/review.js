@@ -103,4 +103,21 @@ export default class ReviewController {
         });
 
     };
+
+    getUserDidReview = (req, res) => {
+      Review.count({
+          where: {
+              user_id: req.params.userId,
+              recipe_id: req.params.recipeId
+          }
+      })
+      .then(result => {
+          let status;
+          status = (result) ? true : false;
+          res.status(200).json({ review: status })
+      })
+      .catch(
+          error => this.errorHandler(error, res)
+      );
+    }
 }

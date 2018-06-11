@@ -11,5 +11,6 @@ router.route('/').get(review.getAll).post(review.create);
 router.route('/review/:id').get(review.getById).delete(review.delete);
 router.route('/review/:id/comments').get(review.getRecipeReviewComments);
 router.route('/recipe/:recipeId').get(review.getRecipeReviews);
+router.route('/user/:userId/recipe/:recipeId').get(review.getUserDidReview);
 
 export { router as reviewRouter };
