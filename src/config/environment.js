@@ -24,7 +24,7 @@ const env = {
         },
     },
     app: {
-        port: 5432
+        port: process.env.NODE_PORT || 5432
     }
 }
 
