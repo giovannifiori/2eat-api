@@ -104,6 +104,21 @@ export default class ReviewController {
 
     };
 
+    update = (req, res) => {
+
+        Review.update(req.body, {
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(review => {
+            res.status(200).json({ message: 'Review updated' });
+        })
+        .catch(
+            error => this.errorHandler(error, res)
+        );
+    };
+
     getUserDidReview = (req, res) => {
       Review.count({
           where: {
