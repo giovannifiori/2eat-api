@@ -5,12 +5,12 @@ dotenv.config();
 const interfaces = os.networkInterfaces();
 const env = {
     db: {
-        db: '2eat_',
+        db: 'd84m65tcf4fepc',
         username: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         params: {
-            host: 'localhost',
-            dialect: 'mysql',
+            host: 'ec2-54-235-132-202.compute-1.amazonaws.com',
+            dialect: 'postgres',
             pool: {
                 max: 10,
                 min: 0,
@@ -24,7 +24,7 @@ const env = {
         },
     },
     app: {
-        port: process.env.NODE_PORT || 3001
+        port: 5432
     }
 }
 
