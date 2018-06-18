@@ -7,7 +7,7 @@ export default class ReviewController {
     getAll = (req, res) => {
         Review.findAll()
         .then(reviews => {
-            if(!reviews || reviews.length == 0){
+            if(!reviews || reviews.length === 0){
                 return res.status(404).json({ message: 'No reviews found' });
             }
             res.status(200).json(reviews);
@@ -55,7 +55,7 @@ export default class ReviewController {
             }
         })
         .then(review => {
-            res.status(200).json({ message: 'Review deleted' });
+            res.status(200).json({ message: 'Review deleted', review });
         })
         .catch(error => {
             res.status(500).json({ message: 'Error deleting review', error });
@@ -72,7 +72,7 @@ export default class ReviewController {
             include: [{ model: User, attributes: ['id', 'name', 'image_path'] }]
         })
         .then(reviews => {
-            if(!reviews || reviews.length == 0){
+            if(!reviews || reviews.length === 0){
                 return res.status(404).json({ message: 'No reviews found for this recipe' });
             }
             res.status(200).json(reviews);
@@ -93,7 +93,7 @@ export default class ReviewController {
             include: [{ model: User, attributes: ['id', 'name'] }]
         })
         .then(comments => {
-            if(!comments || comments.length == 0){
+            if(!comments || comments.length === 0){
                 return res.status(404).json({ message: 'No comments found for this review' });
             }
             res.status(200).json(comments);
@@ -112,11 +112,11 @@ export default class ReviewController {
             }
         })
         .then(review => {
-            res.status(200).json({ message: 'Review updated' });
+            res.status(200).json({ message: 'Review updated', review });
         })
-        .catch(
-            error => this.errorHandler(error, res)
-        );
+        .catch( error => {
+            res.status(500).json({ message: 'Error getting review comments', error });
+        });
     };
 
     getUserDidReview = (req, res) => {
@@ -128,11 +128,11 @@ export default class ReviewController {
       })
       .then(result => {
           let status;
-          status = (result) ? true : false;
+          status = !!result;
           res.status(200).json({ review: status })
       })
-      .catch(
-          error => this.errorHandler(error, res)
-      );
+      .catch( error => {
+          res.status(500).json({ message: 'Error getting review comments', error });
+      });
     }
 }
